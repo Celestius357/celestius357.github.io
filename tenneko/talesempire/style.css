@@ -1,0 +1,296 @@
+@import url(https://fonts.googleapis.com/css?family=VT323);
+
+@keyframes scroll {
+	0% { height: 0 }
+	100% { height: 100%; }
+}
+
+@keyframes type { 
+  from { width: 0; } 
+} 
+
+@keyframes type2 {
+  0%{width: 0;}
+  50%{width: 0;}
+  100%{ width: 100; } 
+} 
+
+@keyframes blink {
+  to{opacity: .0;}
+}
+
+@keyframes scan {
+	from { top: 0 }
+	to { top: 100% }
+}
+
+@keyframes flicker {
+		0% { opacity: 0.15795 }
+		5% { opacity: 0.31511 }
+		10% { opacity: 0.94554 }
+		15% { opacity: 0.2469 }
+		20% { opacity: 0.62031 }
+		25% { opacity: 0.0293 }
+		30% { opacity: 0.00899 }
+		35% { opacity: 0.5344 }
+		40% { opacity: 0.12778 }
+		45% { opacity: 0.52042 }
+		50% { opacity: 0.3823 }
+		55% { opacity: 0.2198 }
+		60% { opacity: 0.9383 }
+		65% { opacity: 0.86615 }
+		70% { opacity: 0.68695 }
+		75% { opacity: 0.55749 }
+		80% { opacity: 0.96984 }
+		85% { opacity: 0.0361 }
+		90% { opacity: 0.24467 }
+		95% { opacity: 0.08351 }
+		100% { opacity: 0.54813 }
+	}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+	box-sizing: border-box;
+	}
+	
+html,
+body {
+	background: #383838;
+	color: #00dd00;
+	font-size: 64.5%;
+	font-size: 1.4em;
+	font-family: 'VT323', Courier;
+	height: auto;
+	margin: 0;
+	padding: 0;
+}
+
+h1, h2, h3 h4, h5, h6 { 
+	font-weight: normal;
+	margin: 0;
+	text-transform: uppercase;
+}
+h4 b {
+  color: white;
+}
+a {
+	color: white;	
+	text-decoration: none;	
+}
+
+a:hover {
+	color: red;
+}
+
+p { 
+	line-height: 100%;
+	margin: 0; 
+}
+	
+span { animation: blink 1s infinite }
+
+ul {
+	list-style: none;
+}
+
+ul a:before,
+p a:before {
+	color: #00dd00;
+	content: ' [ ';
+}
+
+ul a:after,
+p a:after {
+	color: #00dd00;
+	content: ' ] ';	
+}
+
+header.site {
+	margin: 0 0 40px 0;
+	text-transform: uppercase;
+}
+
+nav.site { 
+	margin: 0 0 40px 0;
+  position: relative;
+  width: 100%;
+  z-index: 10;
+}
+
+nav.site ul {
+	padding: 0;
+}
+
+nav.site ul li {
+	display: inline-block;
+  padding: 0 10px;
+  min-width: 250px;
+  width: auto;
+}
+
+input[type=text],
+textarea {
+	background: transparent;
+	border: none;
+	color: #00dd00;
+	display: block;
+	float: left;
+	font-family: 'VT323', Courier;
+	font-size: 1.2em;
+	position: relative;
+	width: 80%;
+	z-index: 10
+}
+
+textarea {
+	margin-bottom: 20px
+	overflow: auto;
+	resize: none;
+}
+
+.clear {
+	clear: both;
+}
+
+.clearfix {
+  overflow: auto;
+  zoom: 1;
+}
+
+.upper { text-transform: uppercase; }
+
+/* LIST OF FURTHER IMPROVEMENTS */
+/*
+currently working on :
+calculation draft for keyframes steps
+
+$scan-moving-duration: 3s;
+$scan-moving-delay: 7s;
+
+total time = 10s (duration + delay)
+keyframes :
+    0%: wait
+    15%: start moving
+    85%: end moving & start waiting
+    100% : wait
+
+(the rest later)
+
+*/
+/* REGULAR SCANLINES SETTINGS */
+/* MOVING SCANLINE SETTINGS */
+/* MIXINS */
+/* CSS .scanlines CLASS */
+.scanlines {
+	position: relative;
+	overflow: hidden;
+  }
+  .scanlines:before, .scanlines:after {
+	display: block;
+	pointer-events: none;
+	content: "";
+	position: absolute;
+  }
+  .scanlines:before {
+	width: 100%;
+	height: 2px;
+	z-index: 2147483649;
+	background: rgba(0, 0, 0, 0.3);
+	opacity: 0.75;
+	-webkit-animation: scanline 6s linear infinite;
+			animation: scanline 6s linear infinite;
+  }
+  .scanlines:after {
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2147483648;
+	background: linear-gradient(to bottom, transparent 50%, rgba(4, 107, 13, 0.3) 51%);
+	background-size: 100% 4px;
+	-webkit-animation: scanlines 1s steps(60) infinite;
+			animation: scanlines 1s steps(60) infinite;
+  }
+  
+  /* ANIMATE UNIQUE SCANLINE */
+  @-webkit-keyframes scanline {
+	0% {
+	  transform: translate3d(0, 200000%, 0);
+	}
+  }
+  @keyframes scanline {
+	0% {
+	  transform: translate3d(0, 200000%, 0);
+	}
+  }
+  @-webkit-keyframes scanlines {
+	0% {
+	  background-position: 0 50%;
+	}
+  }
+  @keyframes scanlines {
+	0% {
+	  background-position: 0 50%;
+	}
+  }
+  /* PRESENTATION STUFF */
+  a {
+	display: block;
+	padding: 1em;
+	margin: 0 auto;
+	width: 80%;
+	color: rgba(255, 255, 255, 0.5);
+	text-transform: uppercase;
+	text-decoration: none;
+	background: rgba(0, 0, 0, 0.8);
+	border: 1px solid rgba(255, 255, 255, 0.5);
+  }
+  a#togglescanlines {
+	position: absolute;
+	width: 182px;
+	top: 300px;
+	right: 58px;
+	border-width: 10px;
+	background: rgba(0, 0, 0, 0.4);
+  }
+  a:hover {
+	color: #fff;
+  }
+  
+  nav {
+	float: right;
+	width: 350px;
+	text-align: center;
+  }
+  
+  ul {
+	display: inline-block;
+	margin: 0;
+	list-style-type: none;
+	padding: 0;
+  }
+  ul.scanlines {
+	position: absolute;
+  }
+  ul iframe,
+  ul video,
+  ul .jpg {
+	width: calc(100vw - 350px);
+	height: 95vh;
+	border: none;
+  }
+  ul li {
+	/*        display: none;
+  
+			&:target {
+				display: inline-block;
+			}*/
+  }
+  
+  .jpg {
+	background: url("https://pompompom.mehdi.cc/crt-art-for-scanlines.jpg") no-repeat;
+	background-size: cover;
+  }
